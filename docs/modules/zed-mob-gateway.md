@@ -94,7 +94,9 @@ workspace database. `POST /projects/sync-zed` imports recent projects into the
 gateway allowlist when they are under the configured projects root or a Zed
 trusted worktree root. `POST /projects` creates a new folder under
 `ZED_MOB_PROJECTS_ROOT` or the gateway's parent `projects` directory and adds it
-to the allowlist.
+to the allowlist. See `docs/modules/baza-projection.md` for the BAZA local
+data-store model, including the context-hub documentation database, generated
+vector index, and Zed project catalog import flow.
 
 Chats:
 

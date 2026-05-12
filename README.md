@@ -122,6 +122,10 @@ checks as the maintainer. In this repository it provides:
 - MCP-first research and project-scoped docs routing
 - BAZA doctor/audit checks before mobile-controlled Codex work
 - sanitized docs sync into the `project-zed-mob-app` context-hub category
+- local documentation indexing through context-hub MongoDB and the generated
+  `.baza/docs-vector/` index
+- project discovery through Zed's local SQLite workspace database, imported into
+  the ignored gateway catalog `config/projects.json`
 - best-practices and security guardrails for contributor work
 - reusable skills, source dossiers, profiles, and project bootstrap scripts
 

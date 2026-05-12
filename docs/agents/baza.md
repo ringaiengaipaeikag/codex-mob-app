@@ -23,6 +23,19 @@ The repository exposes BAZA as a first-class module next to the application
 runtime. `plugins/baza/` is a committed project-local projection; generated
 indexes and projection metadata remain ignored.
 
+Local data-store model:
+
+- context-hub MongoDB at `mongodb://localhost:27017/context-hub` stores
+  sanitized project documentation chunks for `project-zed-mob-app`.
+- `.baza/docs-vector/project-zed-mob-app/index.json` is the generated local
+  vector index derived from sanitized Markdown docs.
+- Zed's local SQLite workspace database is read-only input for project
+  catalogization; selected projects are saved into ignored
+  `config/projects.json`.
+- MCP servers are configured at the user/global level and routed through
+  `$HOME/.codex/mcp-first-routes.md` and
+  `$HOME/.codex/mcp-first-routes.json`.
+
 ## Project Category
 
 ```text

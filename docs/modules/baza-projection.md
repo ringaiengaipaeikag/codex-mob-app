@@ -38,6 +38,90 @@ Generated machine-local BAZA state is intentionally ignored:
 - `plugins/baza/.baza/`
 - `plugins/baza/.baza-projection.json`
 
+## Local Data Stores
+
+This project uses two local data stores around BAZA and project discovery.
+Both are machine-local and must stay out of git.
+
+Documentation store:
+
+- Backend: local MongoDB used by context-hub.
+- Default URI: `mongodb://localhost:27017/context-hub`.
+- Scope: sanitized Markdown from `docs/`, chunked by section and stored under
+  the project category `project-zed-mob-app`.
+- Write path: `make baza-docs-sync`.
+- Read path: context-hub `docs_search(category="project-zed-mob-app")`, then
+  `docs_read` on exact section paths.
+- Health check: `make baza-docs-health`.
+
+Project catalog store:
+
+- Backend: Zed's local SQLite workspace database, read-only.
+- Default path on macOS:
+  `~/Library/Application Support/Zed/db/0-stable/db.sqlite`.
+- Override: `ZED_MOB_ZED_DB=/path/to/db.sqlite`.
+- Scope: recent Zed workspaces and trusted worktrees used to discover local
+  projects that can be imported into the mobile gateway.
+- Gateway APIs: `GET /api/projects/recent` and
+  `POST /api/projects/sync-zed`.
+- Import target: `config/projects.json`, the ignored gateway allowlist/catalog
+  containing project id, name, path, and context-hub category.
+
+`config/projects.json` is not committed because it contains absolute local
+paths. The public template is `config/projects.example.json`.
+
+## Documentation Indexing
+
+BAZA uses layered local retrieval:
+
+```text
+sanitized Markdown docs
+  -> context-hub MongoDB section chunks
+  -> local generated vector index
+  -> hybrid docs search
+```
+
+Mongo/context-hub is the source of truth for shared local documentation. The
+vector index is a generated acceleration and semantic-retrieval layer.
+
+Generated vector index path:
+
+```text
+.baza/docs-vector/<project-category>/index.json
+```
+
+For this repository:
+
+```text
+.baza/docs-vector/project-zed-mob-app/index.json
+```
+
+The default vector backend is `local-hash`, which is dependency-free and
+deterministic. For stronger local semantic retrieval, BAZA supports local
+Ollama embeddings:
+
+```bash
+BAZA_VECTOR_BACKEND=ollama BAZA_VECTOR_MODEL=bge-m3 make baza-docs-vector-sync
+```
+
+Recommended indexing workflow after documentation changes:
+
+```bash
+make baza-docs-sync
+make baza-docs-vector-sync
+make baza-docs-health
+```
+
+Use hybrid search before broad file searching when answering from project docs:
+
+```bash
+make baza-docs-search QUERY="BAZA project catalog"
+```
+
+The vector index is generated from sanitized Markdown only. Do not index or
+commit local databases, runtime state, secrets, credentials, cookies, HAR files,
+screenshots, exports, API captures, or raw reverse-engineering artifacts.
+
 ## What BAZA Provides Here
 
 Contributor and agent workflow:
@@ -99,6 +183,49 @@ When documentation changes materially:
 ```bash
 make baza-docs-sync
 ```
+
+For project discovery, the gateway reads Zed's SQLite database read-only,
+filters paths through trusted roots, and writes selected projects into the
+ignored local allowlist `config/projects.json`. Each imported project receives
+a deterministic `project-<slug>` context-hub category unless the catalog entry
+sets one explicitly.
+
+## MCP Server Recommendations
+
+BAZA assumes MCP-first research. Configure MCP servers globally or in the
+user-level Codex/Zed environment, not in the public repository with secrets.
+The route registry is:
+
+```text
+$HOME/.codex/mcp-first-routes.md
+$HOME/.codex/mcp-first-routes.json
+```
+
+Recommended servers for this project:
+
+- `context_hub`: required for local project documentation search and sync.
+  Always query with the active category, here `project-zed-mob-app`.
+- `github`: required for repository, issue, PR, release, Actions, and CI
+  inspection. Use least-privilege tokens; for publishing this repository the
+  token needs repository contents write access, and workflow write access when
+  `.github/workflows/` is changed.
+- `openaiDeveloperDocs`: required for current Codex/OpenAI API and product
+  behavior. Use it before relying on memory for version-sensitive behavior.
+- `context7`: required for third-party library/framework docs. Resolve the
+  library id first, then query versioned docs when relevant.
+- `stealth-browser`: optional for authorized local/browser inspection,
+  screenshots, DOM/network debugging, and CDP workflows.
+
+Configuration rules:
+
+- Keep MCP credentials in user-level config or environment variables only.
+- Do not commit tokens, cookies, browser profiles, captures, local databases,
+  or generated MCP artifacts.
+- Keep project docs scoped to `project-zed-mob-app`; BAZA's canonical docs live
+  in the separate `project-baza` context-hub category.
+- Run `$HOME/.codex/bin/codex-mcp-audit` after changing global MCP setup.
+- When adding a new durable route, update the global MCP route registry and
+  document the project impact before relying on it in BAZA workflows.
 
 ## Public Repository Model
 
