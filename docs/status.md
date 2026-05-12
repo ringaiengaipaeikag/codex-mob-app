@@ -185,6 +185,9 @@ Last updated: 2026-05-12
 - BAZA local data-store docs: documented context-hub MongoDB for sanitized
   project docs, generated vector indexes, Zed SQLite project discovery, local
   project catalog import, and MCP server setup recommendations.
+- Public contributor UX docs: added setup docs for local databases and MCP,
+  troubleshooting guidance, and sanitized screenshots for the mobile chat and
+  project picker.
 
 ## MCP Research
 

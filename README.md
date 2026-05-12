@@ -37,7 +37,19 @@ Start with:
 
 - `docs/modules/zed-mob-gateway.md` for the app runtime and API.
 - `docs/modules/baza-projection.md` for the BAZA module in this repository.
+- `docs/setup/local-databases.md` for local MongoDB, Zed SQLite, and vector
+  index setup.
+- `docs/setup/mcp.md` for MCP server expectations and token hygiene.
+- `docs/troubleshooting.md` for common local setup failures.
 - `docs/contributing/public-repo.md` for public contributor hygiene.
+
+## Screenshots
+
+Sanitized demo screenshots:
+
+![Mobile chat view](docs/assets/screenshots/mobile-chat.jpg)
+
+![Project picker](docs/assets/screenshots/project-picker.jpg)
 
 ## Requirements
 
@@ -46,6 +58,11 @@ Start with:
 - BAZA projection already present in this repository
 
 ## Setup
+
+Detailed setup notes:
+
+- `docs/setup/local-databases.md`
+- `docs/setup/mcp.md`
 
 Create a local project allowlist:
 
@@ -111,6 +128,8 @@ make app-check
 make app-dev
 make baza-audit
 make baza-docs-sync
+make baza-docs-vector-sync
+make baza-docs-health
 ```
 
 ## BAZA Module

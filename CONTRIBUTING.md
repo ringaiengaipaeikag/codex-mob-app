@@ -7,9 +7,13 @@ operator control explicit.
 ## Start Here
 
 1. Read `README.md`.
-2. Copy `config/projects.example.json` to `config/projects.json`.
-3. Add one local project path to `config/projects.json`.
-4. Run:
+2. Read `docs/setup/local-databases.md` if you are configuring project
+   discovery, context-hub, or BAZA indexes.
+3. Read `docs/setup/mcp.md` if your task needs MCP-backed research or GitHub
+   publishing.
+4. Copy `config/projects.example.json` to `config/projects.json`.
+5. Add one local project path to `config/projects.json`.
+6. Run:
 
 ```bash
 npm run check
@@ -76,6 +80,8 @@ make baza-docs-sync
 ```
 
 The GitHub CI workflow runs `npm run check` and `make baza-audit`.
+
+Common setup failures are collected in `docs/troubleshooting.md`.
 
 ## Pull Requests
 

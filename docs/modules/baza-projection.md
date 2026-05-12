@@ -43,6 +43,8 @@ Generated machine-local BAZA state is intentionally ignored:
 This project uses two local data stores around BAZA and project discovery.
 Both are machine-local and must stay out of git.
 
+The contributor-facing setup guide is `docs/setup/local-databases.md`.
+
 Documentation store:
 
 - Backend: local MongoDB used by context-hub.
@@ -194,6 +196,7 @@ sets one explicitly.
 
 BAZA assumes MCP-first research. Configure MCP servers globally or in the
 user-level Codex/Zed environment, not in the public repository with secrets.
+The contributor-facing setup guide is `docs/setup/mcp.md`.
 The route registry is:
 
 ```text
