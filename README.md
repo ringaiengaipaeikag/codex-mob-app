@@ -3,6 +3,14 @@
 Local mobile web gateway for controlling Codex sessions from an iPhone or other
 mobile browser while Codex runs on the laptop in allowlisted project folders.
 
+This repository has two first-class parts:
+
+- **Zed Mob Gateway app**: the local Node.js service and mobile PWA that expose
+  a phone-friendly Codex control plane.
+- **BAZA project module**: the committed `plugins/baza/` projection that gives
+  the project repeatable Codex guardrails, MCP-first research routing, docs
+  sync, audits, and contributor workflow checks.
+
 The runtime is intentionally local-first:
 
 - Node.js backend with no npm runtime dependencies
@@ -11,6 +19,25 @@ The runtime is intentionally local-first:
 - project allowlist instead of arbitrary phone-side path selection
 - BAZA preflight before mobile-controlled agent work
 - optional bearer token auth for the gateway API
+
+## Repository Map
+
+```text
+src/                    Node.js gateway backend
+public/                 mobile PWA frontend
+config/                 project allowlist example; local allowlist is ignored
+docs/modules/           module docs for the app and BAZA projection
+docs/architecture/      architecture decisions and roadmap
+ios/                    SwiftUI prototype/reference client
+plugins/baza/           BAZA project-local projection
+.github/                CI, issue templates, and PR template
+```
+
+Start with:
+
+- `docs/modules/zed-mob-gateway.md` for the app runtime and API.
+- `docs/modules/baza-projection.md` for the BAZA module in this repository.
+- `docs/contributing/public-repo.md` for public contributor hygiene.
 
 ## Requirements
 
@@ -85,6 +112,21 @@ make app-dev
 make baza-audit
 make baza-docs-sync
 ```
+
+## BAZA Module
+
+BAZA is not application business logic. It is a reusable Codex project bootstrap
+layer, committed here as `plugins/baza/` so contributors can run the same local
+checks as the maintainer. In this repository it provides:
+
+- MCP-first research and project-scoped docs routing
+- BAZA doctor/audit checks before mobile-controlled Codex work
+- sanitized docs sync into the `project-zed-mob-app` context-hub category
+- best-practices and security guardrails for contributor work
+- reusable skills, source dossiers, profiles, and project bootstrap scripts
+
+Generated BAZA state is ignored by git; the committed module is the reusable
+projection, not local indexes or runtime metadata.
 
 ## Repository Hygiene
 

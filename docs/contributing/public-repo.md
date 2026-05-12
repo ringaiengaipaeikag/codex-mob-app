@@ -8,6 +8,12 @@ Make the repository understandable and safe for outside contributors without
 requiring access to the maintainer's local machine, Codex history, or runtime
 state.
 
+The public repository has two first-class surfaces:
+
+- the Zed Mob Gateway application (`src/`, `public/`, `config/`, `ios/`)
+- the BAZA project module (`plugins/baza/`, `AGENTS.md`, `.codex/`, BAZA docs
+  and Make targets)
+
 ## Public Contributor Entry Points
 
 - `README.md`: project purpose, setup, local/LAN launch, configuration, hygiene.
@@ -18,6 +24,8 @@ state.
 - `.github/workflows/ci.yml`: syntax and BAZA audit checks.
 - `.github/ISSUE_TEMPLATE/`: structured bug and feature reports.
 - `.github/pull_request_template.md`: verification checklist.
+- `docs/modules/baza-projection.md`: BAZA module purpose, boundaries, and
+  contributor commands.
 
 ## BAZA in the Public Repo
 
@@ -37,6 +45,10 @@ Generated BAZA state is ignored:
 
 This keeps the reusable guardrails available while excluding local generated
 indexes and machine-specific metadata.
+
+BAZA's own canonical documentation belongs to the `project-baza` context-hub
+category. This application repository documents only the local adoption state,
+public contributor workflow, and how the gateway enforces BAZA preflight.
 
 ## Local Files That Must Stay Private
 
@@ -65,8 +77,12 @@ False positives are acceptable only when they are clearly public URLs or generic
 documentation. Real local paths, credentials, runtime data, and generated
 artifacts must not be committed.
 
-## Current Publishing Blocker
+## Publishing Status
 
-The local machine does not currently expose an authenticated GitHub CLI or a
-configured git remote. To publish, add a remote or authenticate GitHub tooling,
-then push the initial commit.
+Published repository:
+
+```text
+https://github.com/ringaiengaipaeikag/codex-mob-app
+```
+
+CI runs `npm run check` and `make baza-audit` on pushes and pull requests.

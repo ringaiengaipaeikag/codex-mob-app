@@ -179,6 +179,9 @@ Last updated: 2026-05-12
   `docs/contributing/public-repo.md`.
 - Public repository license: added MIT `LICENSE` and linked it from
   `README.md`.
+- BAZA public docs refresh: split the repository description into the Zed Mob
+  Gateway app and the BAZA projection module, added
+  `docs/modules/baza-projection.md`, and updated public contributor docs.
 
 ## MCP Research
 
