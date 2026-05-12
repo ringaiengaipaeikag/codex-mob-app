@@ -1,0 +1,15 @@
+{
+  "name": "zed-mob-gateway",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local mobile web gateway for controlling Codex sessions on a laptop.",
+  "type": "module",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "NODE_ENV=production node src/server.js",
+    "check": "node --check src/server.js && node --check src/config.js && node --check src/baza.js && node --check src/codexAppServer.js && node --check src/historyManager.js && node --check src/sessionManager.js && node --check src/store.js && node --check src/uploads.js && node --check src/zedProjects.js && node --check public/app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

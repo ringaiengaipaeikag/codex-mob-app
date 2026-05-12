@@ -1,0 +1,276 @@
+# BAZA official source registry.
+#
+# This registry tracks official docs and repositories used by BAZA. It is
+# intentionally public metadata only: do not store tokens, private URLs, cookies,
+# local configs, or generated captures here.
+
+[[sources]]
+id = "openai-codex-cli-reference"
+title = "OpenAI Codex CLI Reference"
+section = "codex"
+kind = "official-docs"
+url = "https://developers.openai.com/codex/cli/reference"
+mcp_route = "openaiDeveloperDocs"
+dossier = "docs/source-dossiers/openai-codex.md"
+
+[[sources]]
+id = "openai-codex-config-reference"
+title = "OpenAI Codex Configuration Reference"
+section = "codex"
+kind = "official-docs"
+url = "https://developers.openai.com/codex/config-reference"
+mcp_route = "openaiDeveloperDocs"
+dossier = "docs/source-dossiers/openai-codex.md"
+
+[[sources]]
+id = "openai-codex-best-practices"
+title = "OpenAI Codex Best Practices"
+section = "codex"
+kind = "official-docs"
+url = "https://developers.openai.com/codex/learn/best-practices"
+mcp_route = "openaiDeveloperDocs"
+dossier = "docs/source-dossiers/openai-codex.md"
+
+[[sources]]
+id = "openai-codex-repo"
+title = "OpenAI Codex GitHub Repository"
+section = "codex"
+kind = "official-repository"
+url = "https://github.com/openai/codex"
+mcp_route = "github"
+dossier = "docs/source-dossiers/openai-codex.md"
+
+[[sources]]
+id = "zed-docs"
+title = "Zed Official Documentation"
+section = "zed"
+kind = "official-docs"
+url = "https://zed.dev/docs"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/zed.md"
+
+[[sources]]
+id = "zed-external-agents"
+title = "Zed External Agents"
+section = "zed"
+kind = "official-docs"
+url = "https://zed.dev/docs/ai/external-agents"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/zed.md"
+
+[[sources]]
+id = "zed-repo"
+title = "Zed GitHub Repository"
+section = "zed"
+kind = "official-repository"
+url = "https://github.com/zed-industries/zed"
+mcp_route = "github"
+dossier = "docs/source-dossiers/zed.md"
+
+[[sources]]
+id = "zed-codex-acp-repo"
+title = "Zed Codex ACP Repository"
+section = "zed"
+kind = "official-repository"
+url = "https://github.com/zed-industries/codex-acp"
+mcp_route = "github"
+dossier = "docs/source-dossiers/zed-codex-acp.md"
+
+[[sources]]
+id = "playwright-docs"
+title = "Playwright Documentation"
+section = "browser-automation"
+kind = "official-docs"
+url = "https://playwright.dev/docs/intro"
+mcp_route = "context7-or-web-official"
+dossier = "docs/source-dossiers/playwright.md"
+
+[[sources]]
+id = "playwright-repo"
+title = "Playwright GitHub Repository"
+section = "browser-automation"
+kind = "official-repository"
+url = "https://github.com/microsoft/playwright"
+mcp_route = "github"
+dossier = "docs/source-dossiers/playwright.md"
+
+[[sources]]
+id = "mitmproxy-docs"
+title = "mitmproxy Documentation"
+section = "web-traffic-capture"
+kind = "official-docs"
+url = "https://docs.mitmproxy.org/stable/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/mitmproxy.md"
+
+[[sources]]
+id = "mitmproxy-repo"
+title = "mitmproxy GitHub Repository"
+section = "web-traffic-capture"
+kind = "official-repository"
+url = "https://github.com/mitmproxy/mitmproxy"
+mcp_route = "github"
+dossier = "docs/source-dossiers/mitmproxy.md"
+
+[[sources]]
+id = "curl-cffi-docs"
+title = "curl_cffi Documentation"
+section = "tls-fingerprint-tooling"
+kind = "official-docs"
+url = "https://curl-cffi.readthedocs.io"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/tls-fingerprint-tooling.md"
+
+[[sources]]
+id = "curl-cffi-repo"
+title = "curl_cffi GitHub Repository"
+section = "tls-fingerprint-tooling"
+kind = "official-repository"
+url = "https://github.com/lexiforest/curl_cffi"
+mcp_route = "github"
+dossier = "docs/source-dossiers/tls-fingerprint-tooling.md"
+
+[[sources]]
+id = "lexiforest-curl-impersonate-docs"
+title = "lexiforest curl-impersonate Documentation"
+section = "tls-fingerprint-tooling"
+kind = "official-docs"
+url = "https://curl-impersonate.readthedocs.io/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/tls-fingerprint-tooling.md"
+
+[[sources]]
+id = "lexiforest-curl-impersonate-repo"
+title = "lexiforest curl-impersonate GitHub Repository"
+section = "tls-fingerprint-tooling"
+kind = "official-repository"
+url = "https://github.com/lexiforest/curl-impersonate"
+mcp_route = "github"
+dossier = "docs/source-dossiers/tls-fingerprint-tooling.md"
+
+[[sources]]
+id = "lwthiker-curl-impersonate-repo"
+title = "Original curl-impersonate GitHub Repository"
+section = "tls-fingerprint-tooling"
+kind = "official-repository"
+url = "https://github.com/lwthiker/curl-impersonate"
+mcp_route = "github"
+dossier = "docs/source-dossiers/tls-fingerprint-tooling.md"
+
+[[sources]]
+id = "fing-repo"
+title = "fing GitHub Repository"
+section = "tls-fingerprint-tooling"
+kind = "official-repository"
+url = "https://github.com/muzzii255/fing"
+mcp_route = "github"
+dossier = "docs/source-dossiers/tls-fingerprint-tooling.md"
+
+[[sources]]
+id = "tls-client-repo"
+title = "tls-client GitHub Repository"
+section = "tls-fingerprint-tooling"
+kind = "official-repository"
+url = "https://github.com/bogdanfinn/tls-client"
+mcp_route = "github"
+dossier = "docs/source-dossiers/tls-fingerprint-tooling.md"
+
+[[sources]]
+id = "python-tls-client-repo"
+title = "Python-Tls-Client GitHub Repository"
+section = "tls-fingerprint-tooling"
+kind = "official-repository"
+url = "https://github.com/FlorianREGAZ/Python-Tls-Client"
+mcp_route = "github"
+dossier = "docs/source-dossiers/tls-fingerprint-tooling.md"
+
+[[sources]]
+id = "google-recaptcha-docs"
+title = "Google reCAPTCHA Documentation"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://developers.google.com/recaptcha/docs/v3"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+
+[[sources]]
+id = "hcaptcha-docs"
+title = "hCaptcha Documentation"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://docs.hcaptcha.com/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+
+[[sources]]
+id = "cloudflare-turnstile-docs"
+title = "Cloudflare Turnstile Documentation"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://developers.cloudflare.com/turnstile/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+
+[[sources]]
+id = "cloudflare-challenge-pages-docs"
+title = "Cloudflare Challenge Pages Documentation"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://developers.cloudflare.com/cloudflare-challenges/challenge-types/challenge-pages/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+
+[[sources]]
+id = "arkose-developer-docs"
+title = "Arkose Labs Developer Documentation"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://developer.arkoselabs.com/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+
+[[sources]]
+id = "datadome-docs"
+title = "DataDome Documentation"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://docs.datadome.co/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+
+[[sources]]
+id = "akamai-bot-manager-docs"
+title = "Akamai Cloud Security About Bots"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://techdocs.akamai.com/cloud-security/docs/about-bots"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+allowed_statuses = [403]
+
+[[sources]]
+id = "aws-waf-captcha-challenge-docs"
+title = "AWS WAF CAPTCHA and Challenge Documentation"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://docs.aws.amazon.com/waf/latest/developerguide/waf-captcha-and-challenge.html"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+
+[[sources]]
+id = "owasp-automated-threats"
+title = "OWASP Automated Threats to Web Applications"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://owasp.org/www-project-automated-threats-to-web-applications/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"
+
+[[sources]]
+id = "cdp-target-domain"
+title = "Chrome DevTools Protocol Target Domain"
+section = "web-protection-analysis"
+kind = "official-docs"
+url = "https://chromedevtools.github.io/devtools-protocol/tot/Target/"
+mcp_route = "web-official"
+dossier = "docs/source-dossiers/web-protection-providers.md"

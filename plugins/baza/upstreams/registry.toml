@@ -1,0 +1,330 @@
+# BAZA upstream dependency registry.
+#
+# This file tracks public repositories that BAZA uses as source material for
+# skills, workflows, scripts, or documentation. It is intentionally metadata
+# only: do not store tokens, private URLs, or raw generated artifacts here.
+
+[[repositories]]
+id = "android-reverse-engineering-skill"
+section = "reverse-engineering"
+provider = "github"
+url = "https://github.com/SimoneAvogadro/android-reverse-engineering-skill"
+owner = "SimoneAvogadro"
+repo = "android-reverse-engineering-skill"
+license = "Apache-2.0"
+adoption = "planned-codex-port"
+upstream_type = "claude-code-skill"
+baza_target_type = "codex-explicit-skill"
+pinned_release = "v1.1.0"
+pinned_default_branch = "master"
+pinned_default_branch_sha = "6a31ed3fa2fc96d2366e057dcf13bbf5c2bdcdaa"
+check_release = true
+check_default_branch = true
+explicit_only = true
+notes = "Track as Android reverse engineering/API extraction source material. Do not import Claude plugin layout as-is."
+watchlist = [
+  "https://github.com/SimoneAvogadro/android-reverse-engineering-skill/pull/16",
+  "https://github.com/SimoneAvogadro/android-reverse-engineering-skill/issues/5",
+  "https://github.com/SimoneAvogadro/android-reverse-engineering-skill/issues/13",
+  "https://github.com/SimoneAvogadro/android-reverse-engineering-skill/issues/14",
+]
+
+[[repositories]]
+id = "playwright"
+section = "reverse-engineering/web-traffic-capture"
+provider = "github"
+url = "https://github.com/microsoft/playwright"
+owner = "microsoft"
+repo = "playwright"
+license = "Apache-2.0"
+adoption = "primary-web-action-network-runtime-recorder"
+upstream_type = "browser-automation-framework"
+baza_target_type = "codex-explicit-skill-runtime"
+pinned_release = "v1.59.1"
+pinned_default_branch = "main"
+pinned_default_branch_sha = "ec7ee900611b95e8821cefb401e61a10d8075269"
+check_release = true
+check_default_branch = true
+explicit_only = true
+notes = "Default BAZA runtime for authorized web action capture, HAR, trace, console, and CDP event collection."
+watchlist = []
+
+[[repositories]]
+id = "devtools-protocol"
+section = "reverse-engineering/web-traffic-capture"
+provider = "github"
+url = "https://github.com/ChromeDevTools/devtools-protocol"
+owner = "ChromeDevTools"
+repo = "devtools-protocol"
+license = "BSD-3-Clause"
+adoption = "protocol-reference"
+upstream_type = "browser-protocol-reference"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = ""
+pinned_default_branch = "master"
+pinned_default_branch_sha = "8feb4e11cf91351cab8ba981b2a0bdaf8f2b5149"
+check_release = false
+check_default_branch = true
+explicit_only = true
+notes = "Reference for CDP Network, Runtime, Debugger, Profiler, Page, Log, Performance, and Tracing domains."
+watchlist = []
+
+[[repositories]]
+id = "mitmproxy"
+section = "reverse-engineering/web-traffic-capture"
+provider = "github"
+url = "https://github.com/mitmproxy/mitmproxy"
+owner = "mitmproxy"
+repo = "mitmproxy"
+license = "MIT"
+adoption = "primary-independent-http-tls-websocket-capture"
+upstream_type = "http-tls-proxy"
+baza_target_type = "codex-explicit-skill-runtime"
+pinned_release = "v12.2.2"
+pinned_default_branch = "main"
+pinned_default_branch_sha = "ab470e5397d8cb73b3c44b9ee75834e6cda83ae7"
+check_release = true
+check_default_branch = true
+explicit_only = true
+notes = "Use as read-only independent HTTP/TLS/WebSocket recorder and redaction/export layer."
+watchlist = []
+
+[[repositories]]
+id = "puppeteer"
+section = "reverse-engineering/web-traffic-capture"
+provider = "github"
+url = "https://github.com/puppeteer/puppeteer"
+owner = "puppeteer"
+repo = "puppeteer"
+license = "Apache-2.0"
+adoption = "secondary-cdp-browser-automation-reference"
+upstream_type = "browser-automation-framework"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = "puppeteer-core-v24.42.0"
+pinned_default_branch = "main"
+pinned_default_branch_sha = "50438cff577f8f27d34aefeb2af84658b62d7db5"
+check_release = true
+check_default_branch = true
+explicit_only = true
+notes = "Secondary reference for CDPSession, tracing, request/response events, and JavaScript/CSS coverage."
+watchlist = []
+
+[[repositories]]
+id = "zaproxy"
+section = "reverse-engineering/web-traffic-capture"
+provider = "github"
+url = "https://github.com/zaproxy/zaproxy"
+owner = "zaproxy"
+repo = "zaproxy"
+license = "Apache-2.0"
+adoption = "optional-open-source-security-proxy-reference"
+upstream_type = "security-proxy"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = "v2.17.0"
+pinned_default_branch = "main"
+pinned_default_branch_sha = "0df1822b55d7be412b77ce210e24f224477328b4"
+check_release = true
+check_default_branch = true
+explicit_only = true
+notes = "Optional manual security proxy for passive review, WebSocket review, and HAR import/export."
+watchlist = []
+
+[[repositories]]
+id = "stealth-browser-mcp"
+section = "reverse-engineering/web-traffic-capture"
+provider = "github"
+url = "https://github.com/vibheksoni/stealth-browser-mcp"
+owner = "vibheksoni"
+repo = "stealth-browser-mcp"
+license = "MIT"
+adoption = "authorized-explicit-browser-cdp-fallback"
+upstream_type = "mcp-browser-automation-server"
+baza_target_type = "codex-explicit-mcp-reference"
+pinned_release = "v0.2.5"
+pinned_default_branch = "master"
+pinned_default_branch_sha = "17311be7b0f6b879644c39ec5e8f0dc8a9dd920c"
+check_release = true
+check_default_branch = true
+explicit_only = true
+notes = "Fallback for authorized browser/CDP inspection only. Do not use as default anti-bot bypass automation."
+watchlist = []
+
+[[repositories]]
+id = "openai-codex"
+section = "official-sources/codex"
+provider = "github"
+url = "https://github.com/openai/codex"
+owner = "openai"
+repo = "codex"
+license = "Apache-2.0"
+adoption = "official-codex-implementation-and-release-evidence"
+upstream_type = "codex-cli-app-server-plugin-skill-implementation"
+baza_target_type = "official-source-reference"
+pinned_release = "rust-v0.128.0"
+pinned_default_branch = "main"
+pinned_default_branch_sha = ""
+check_release = true
+check_default_branch = false
+explicit_only = false
+notes = "Official repository for Codex CLI/app/server behavior, plugin workflows, config schema, skills, MCP, permissions, and multi-agent implementation evidence."
+watchlist = []
+
+[[repositories]]
+id = "zed"
+section = "official-sources/zed"
+provider = "github"
+url = "https://github.com/zed-industries/zed"
+owner = "zed-industries"
+repo = "zed"
+license = "GPL-3.0"
+adoption = "official-zed-editor-agent-and-acp-evidence"
+upstream_type = "editor-agent-runtime"
+baza_target_type = "official-source-reference"
+pinned_release = "v1.0.0"
+pinned_default_branch = "main"
+pinned_default_branch_sha = ""
+check_release = true
+check_default_branch = false
+explicit_only = false
+notes = "Official repository for Zed editor, Agent Panel, external agents, MCP behavior, and Zed/Codex integration evidence."
+watchlist = []
+
+[[repositories]]
+id = "zed-codex-acp"
+section = "official-sources/zed"
+provider = "github"
+url = "https://github.com/zed-industries/codex-acp"
+owner = "zed-industries"
+repo = "codex-acp"
+license = "Apache-2.0"
+adoption = "official-zed-codex-acp-bridge"
+upstream_type = "agent-client-protocol-adapter"
+baza_target_type = "official-source-reference"
+pinned_release = "v0.12.0"
+pinned_default_branch = "main"
+pinned_default_branch_sha = ""
+check_release = true
+check_default_branch = false
+explicit_only = false
+notes = "Official Zed bridge for running Codex through ACP. Track release drift before changing BAZA Zed/Codex guidance."
+watchlist = []
+
+[[repositories]]
+id = "curl-cffi"
+section = "reverse-engineering/tls-fingerprint-tooling"
+provider = "github"
+url = "https://github.com/lexiforest/curl_cffi"
+owner = "lexiforest"
+repo = "curl_cffi"
+license = "MIT"
+adoption = "explicit-python-tls-http-fingerprint-research"
+upstream_type = "python-curl-impersonate-binding"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = "v0.15.1b1"
+pinned_default_branch = "main"
+pinned_default_branch_sha = ""
+check_release = true
+check_default_branch = false
+explicit_only = true
+notes = "Preferred Python candidate for authorized TLS/HTTP compatibility diagnostics. Do not treat upstream bypass examples as default project guidance."
+watchlist = []
+
+[[repositories]]
+id = "lexiforest-curl-impersonate"
+section = "reverse-engineering/tls-fingerprint-tooling"
+provider = "github"
+url = "https://github.com/lexiforest/curl-impersonate"
+owner = "lexiforest"
+repo = "curl-impersonate"
+license = "curl/MIT-derived"
+adoption = "explicit-curl-libcurl-diagnostic-reference"
+upstream_type = "curl-browser-impersonation-fork"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = "v1.5.6"
+pinned_default_branch = "main"
+pinned_default_branch_sha = ""
+check_release = true
+check_default_branch = false
+explicit_only = true
+notes = "Active curl-impersonate fork used by curl_cffi. Track for browser profile, HTTP/3, and binary packaging changes."
+watchlist = []
+
+[[repositories]]
+id = "lwthiker-curl-impersonate"
+section = "reverse-engineering/tls-fingerprint-tooling"
+provider = "github"
+url = "https://github.com/lwthiker/curl-impersonate"
+owner = "lwthiker"
+repo = "curl-impersonate"
+license = "curl/MIT-derived"
+adoption = "original-curl-impersonate-reference"
+upstream_type = "curl-browser-impersonation-original"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = "v0.6.1"
+pinned_default_branch = "main"
+pinned_default_branch_sha = ""
+check_release = true
+check_default_branch = false
+explicit_only = true
+notes = "Original implementation and conceptual reference for browser-like TLS and HTTP/2 handshakes."
+watchlist = []
+
+[[repositories]]
+id = "fing"
+section = "reverse-engineering/tls-fingerprint-tooling"
+provider = "github"
+url = "https://github.com/muzzii255/fing"
+owner = "muzzii255"
+repo = "fing"
+license = "MIT"
+adoption = "research-only-fingerprint-generation-reference"
+upstream_type = "tls-http2-fingerprint-generator"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = ""
+pinned_default_branch = "master"
+pinned_default_branch_sha = "4ae93bbfaacde76b74fcb9940cbbc5c53f8063e6"
+check_release = false
+check_default_branch = true
+explicit_only = true
+notes = "Research-only JA3 and HTTP/2/Akamai-style fingerprint generation reference. README is evasion-oriented; do not adopt as default runtime."
+watchlist = []
+
+[[repositories]]
+id = "tls-client"
+section = "reverse-engineering/tls-fingerprint-tooling"
+provider = "github"
+url = "https://github.com/bogdanfinn/tls-client"
+owner = "bogdanfinn"
+repo = "tls-client"
+license = "MIT"
+adoption = "ecosystem-reference-native-go-tls-client"
+upstream_type = "native-go-tls-http-client"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = "v1.14.0"
+pinned_default_branch = "master"
+pinned_default_branch_sha = ""
+check_release = true
+check_default_branch = false
+explicit_only = true
+notes = "Alternative TLS client ecosystem reference. Latest observed release includes WebSocket and HTTP/3 fingerprinting changes."
+watchlist = []
+
+[[repositories]]
+id = "python-tls-client"
+section = "reverse-engineering/tls-fingerprint-tooling"
+provider = "github"
+url = "https://github.com/FlorianREGAZ/Python-Tls-Client"
+owner = "FlorianREGAZ"
+repo = "Python-Tls-Client"
+license = "MIT"
+adoption = "ecosystem-reference-python-wrapper"
+upstream_type = "python-wrapper-around-tls-client"
+baza_target_type = "codex-explicit-skill-reference"
+pinned_release = "1.0.1"
+pinned_default_branch = "master"
+pinned_default_branch_sha = ""
+check_release = true
+check_default_branch = false
+explicit_only = true
+notes = "Python wrapper reference around bogdanfinn/tls-client. Use only when curl_cffi is not a fit."
+watchlist = []

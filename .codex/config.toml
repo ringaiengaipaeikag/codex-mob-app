@@ -1,0 +1,85 @@
+model = "gpt-5.5"
+model_reasoning_effort = "high"
+review_model = "gpt-5.5"
+
+[agents]
+max_threads = 6
+max_depth = 1
+job_max_runtime_seconds = 1800
+
+# BAZA skills. Paths are relative to this .codex/config.toml file.
+[[skills.config]]
+path = "../plugins/baza/skills/baza-official-docs"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/baza-source-dossier"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/baza-bootstrap"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/baza-docs-sync"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/baza-orchestration"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/web-traffic-capture"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/js-runtime-analysis"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/tls-fingerprint-research"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/captcha-protection-analysis"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/http-traffic-analysis"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/js-coverage-analysis"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/bot-detection-analysis"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/cloudflare-analysis"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/datadome-analysis"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/trustev-fingerprint"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/akamai-bypass"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/recaptcha-solve"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/tps-browser-harvester"
+enabled = true
+
+[[skills.config]]
+path = "../plugins/baza/skills/baza-docs-search"
+enabled = true

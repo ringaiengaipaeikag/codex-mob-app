@@ -1,0 +1,6 @@
+id = "web-app"
+name = "Web Application"
+description = "Frontend/backend projects with browser verification, API routes, and product documentation."
+recommended_skills = ["baza-official-docs", "baza-source-dossier", "baza-docs-search", "baza-docs-sync", "baza-orchestration", "browser-research"]
+recommended_docs = ["docs/status.md", "docs/architecture.md", "docs/runbooks"]
+explicit_only = ["web-traffic-capture"]

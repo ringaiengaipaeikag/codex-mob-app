@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0f1726">
+    <title>Zed Mob Gateway</title>
+    <link rel="stylesheet" href="/styles.css?v=20260505-2045">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="session-panel" aria-label="Projects and sessions">
+        <header class="brand-bar">
+          <div>
+            <h1>Zed Mob</h1>
+            <p id="connectionLine">connecting</p>
+          </div>
+          <div class="brand-actions">
+            <button id="jumpChatButton" class="icon-button" type="button" title="Jump to composer" aria-label="Jump to composer">↓</button>
+            <button id="refreshProjects" class="icon-button" type="button" title="Refresh app state" aria-label="Refresh app state">↻</button>
+          </div>
+        </header>
+
+        <button id="projectPickerButton" class="project-card project-picker-button" type="button">
+          <strong>No project</strong>
+          <span class="project-path">Select project</span>
+        </button>
+        <div id="projectList" class="project-list" hidden></div>
+
+        <div class="panel-actions">
+          <button id="newSessionButton" type="button">New Session</button>
+          <button id="preflightButton" type="button">BAZA</button>
+          <button id="historyButton" type="button">History</button>
+          <button id="chatButton" type="button">Chat</button>
+        </div>
+
+        <div class="current-chat-card">
+          <p>Current Chat</p>
+          <strong id="currentChatTitle">No active session</strong>
+          <span id="currentChatMeta">Open history or start a new session</span>
+        </div>
+        <div id="historyList" class="session-list history-list" hidden></div>
+        <div id="sessionList" class="session-list" hidden></div>
+      </section>
+
+      <section class="chat-screen" aria-label="Chat">
+        <header class="chat-header">
+          <button id="exitChatFocusButton" class="round-button chat-menu" type="button" title="Chat history" aria-label="Open chat history" hidden>☰</button>
+          <div>
+            <button id="projectTitle" class="project-title project-title-button" type="button">No project</button>
+            <h2 id="sessionTitle">No session</h2>
+          </div>
+          <div class="chat-header-actions">
+            <button id="backButton" class="round-button chat-exit" type="button" title="Settings" aria-label="Settings">↑</button>
+          </div>
+        </header>
+
+        <div class="status-strip">
+          <span id="bazaStatus">BAZA waiting</span>
+          <span id="sessionStatus">No active session</span>
+          <button id="approvalModeButton" class="approval-mode-button" type="button" title="Toggle permission mode" aria-label="Toggle permission mode">Allow: ask</button>
+        </div>
+
+        <section id="chatMessages" class="chat-messages" aria-live="polite">
+          <article class="message-card system">
+            <div class="message-stack">
+              <div class="message-bubble">
+                <div class="message-text">Select or create a session.</div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <details class="debug-drawer">
+          <summary>Dev Tools</summary>
+          <div class="diagnostics-actions">
+            <button id="statusButton" class="mini-button" type="button">Status</button>
+            <button id="probeButton" class="mini-button" type="button">Probe</button>
+            <button id="refreshHistoryButton" class="mini-button" type="button">Refresh Chats</button>
+            <button id="stopButton" class="mini-button danger" type="button">Stop Runtime</button>
+          </div>
+          <pre id="output">build 20260505-2045</pre>
+        </details>
+
+        <footer class="composer">
+          <div id="attachmentTray" class="attachment-tray" hidden></div>
+          <div class="composer-row">
+            <button id="attachButton" class="round-button attach" type="button" title="Attach image" aria-label="Attach image">＋</button>
+            <input id="imageInput" type="file" accept="image/*,.heic,.heif" multiple hidden>
+            <button id="interruptButton" class="round-button danger" type="button" title="Stop current answer" aria-label="Stop current answer" hidden>■</button>
+            <div id="messageInput" class="composer-input" contenteditable="true" role="textbox" aria-label="Message" aria-multiline="true" data-placeholder="Message" spellcheck="true" autocorrect="on" autocapitalize="sentences" enterkeyhint="send"></div>
+            <button id="sendButton" class="round-button send" type="button" title="Send" aria-label="Send">←</button>
+          </div>
+        </footer>
+      </section>
+    </main>
+
+    <div id="historySheet" class="sheet history-drawer" hidden>
+      <button id="historySheetBackdrop" class="sheet-backdrop" type="button" aria-label="Close history"></button>
+      <section class="sheet-panel" aria-label="Chat history">
+        <header class="sheet-header">
+          <div>
+            <h2>Chats</h2>
+            <p id="historySheetMeta">Project chats</p>
+          </div>
+          <div class="sheet-header-actions">
+            <button id="historyNewSessionButton" class="round-button drawer-new" type="button" title="New chat" aria-label="New chat">＋</button>
+          </div>
+        </header>
+        <div id="historySheetList" class="session-list history-list"></div>
+        <button id="historyLoadMoreButton" class="mini-button load-more" type="button" hidden>Load More</button>
+      </section>
+    </div>
+
+    <div id="projectSheet" class="sheet" hidden>
+      <button id="projectSheetBackdrop" class="sheet-backdrop" type="button" aria-label="Close projects"></button>
+      <section class="sheet-panel" aria-label="Projects">
+        <header class="sheet-header">
+          <div>
+            <h2>Projects</h2>
+            <p id="projectSheetMeta">Zed recent and mobile projects</p>
+          </div>
+          <button id="projectSheetClose" class="round-button" type="button" aria-label="Close projects">×</button>
+        </header>
+        <input id="projectSearch" class="sheet-search" type="search" placeholder="Search projects">
+        <div class="sheet-actions">
+          <button id="syncZedProjectsButton" type="button">Sync Zed Projects</button>
+        </div>
+        <div id="projectSheetList" class="project-list"></div>
+        <form id="newProjectForm" class="new-project-form">
+          <input id="newProjectName" type="text" placeholder="New project name" autocomplete="off">
+          <button type="submit">Create</button>
+        </form>
+      </section>
+    </div>
+
+    <script src="/app.js?v=20260505-2045" type="module"></script>
+  </body>
+</html>

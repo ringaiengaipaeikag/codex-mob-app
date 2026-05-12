@@ -1,0 +1,6 @@
+id = "browser-research"
+name = "Browser Research"
+description = "Browser automation, screenshots, DOM/CDP inspection, and sanctioned web research workflows."
+recommended_skills = ["baza-official-docs", "baza-source-dossier", "baza-docs-search", "browser-research", "web-traffic-capture", "http-traffic-analysis", "js-runtime-analysis", "js-coverage-analysis"]
+recommended_docs = ["docs/status.md", "docs/web-traffic-capture.md", "docs/web-traffic-capture-pipeline.md"]
+explicit_only = ["web-traffic-capture", "http-traffic-analysis", "js-runtime-analysis", "js-coverage-analysis", "stealth-browser"]

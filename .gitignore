@@ -1,0 +1,58 @@
+# macOS / editor state.
+.DS_Store
+*.swp
+*.swo
+
+# Node.js.
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment and secrets.
+.env
+.env.*
+!.env.example
+
+# Local project allowlist. Keep config/projects.example.json in git.
+config/projects.json
+
+# Zed Mob Gateway runtime state.
+.zed-mob/
+
+# BAZA generated/capture artifacts.
+.baza/web-re/
+.baza/docs-vector/
+**/.baza/docs-vector/
+plugins/baza/.baza-projection.json
+*.har
+*.har.zip
+*.flows
+*.pcap
+*.pcapng
+sslkeylogfile*
+playwright-trace.zip
+trace.zip
+browser-profile/
+.playwright-mcp/
+
+# iOS / Xcode generated state.
+ios.zip
+DerivedData/
+build/
+*.xcuserstate
+*.xcscmblueprint
+xcuserdata/
+ios/**/xcuserdata/
+ios/**/*.xcuserstate
+
+# Generated archives.
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Python generated files.
+__pycache__/
+*.py[cod]

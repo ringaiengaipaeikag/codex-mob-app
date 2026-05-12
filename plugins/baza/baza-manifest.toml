@@ -1,0 +1,137 @@
+name = "BAZA"
+version = "0.1.3"
+kind = "codex-project-bootstrap"
+description = "Internal reusable Codex customization baseline for new and existing projects."
+official_terms = ["Codex customization", "project-scoped Codex customization", "Codex plugin"]
+
+[scope]
+new_projects = true
+existing_projects = true
+global_defaults = true
+project_overrides = true
+
+[policy]
+no_paid_search_apis = true
+require_project_context_category = true
+require_sanitized_docs = true
+require_docs_sync_on_module_change = true
+require_mcp_first_research = true
+require_orchestration_policy = true
+require_official_source_first = true
+require_source_dossiers_for_reusable_research = true
+require_best_practices_policy = true
+require_upstream_update_checks = true
+require_js_runtime_analysis_policy = true
+require_tls_fingerprint_research_policy = true
+require_capture_evidence_graph_policy = true
+require_web_protection_analysis_policy = true
+require_http_traffic_analysis_policy = true
+require_js_coverage_analysis_policy = true
+require_guarded_provider_analysis_policy = true
+require_vector_memory_policy = true
+require_docs_health_check = true
+prohibit_secret_indexing = true
+prohibit_sensitive_artifacts = true
+
+[paths]
+global_source = "$HOME/.codex/baza"
+global_docs_category = "project-baza"
+project_adoption_doc = "docs/agents/baza.md"
+project_status_doc = "docs/status.md"
+project_architecture_doc = "docs/architecture.md"
+best_practices_doc = "$HOME/.codex/baza/docs/best-practices-policy.md"
+project_modules_dir = "docs/modules"
+project_decisions_dir = "docs/decisions"
+official_sources_doc = "$HOME/.codex/baza/docs/official-sources.md"
+official_sources_registry = "$HOME/.codex/baza/official-sources/registry.toml"
+source_dossiers_dir = "$HOME/.codex/baza/docs/source-dossiers"
+js_runtime_analysis_doc = "$HOME/.codex/baza/docs/js-runtime-analysis.md"
+tls_fingerprint_tooling_doc = "$HOME/.codex/baza/docs/tls-fingerprint-tooling.md"
+capture_evidence_graph_doc = "$HOME/.codex/baza/docs/capture-evidence-graph.md"
+web_protection_analysis_doc = "$HOME/.codex/baza/docs/web-protection-analysis.md"
+project_profiles_doc = "$HOME/.codex/baza/docs/project-profiles.md"
+project_profiles_dir = "$HOME/.codex/baza/profiles"
+vector_memory_policy_doc = "$HOME/.codex/baza/docs/vector-memory-policy.md"
+global_mcp_routes_md = "$HOME/.codex/mcp-first-routes.md"
+global_mcp_routes_json = "$HOME/.codex/mcp-first-routes.json"
+upstream_registry = "$HOME/.codex/baza/upstreams/registry.toml"
+
+[commands]
+init = "python3 $HOME/.codex/baza/scripts/baza_init.py --root <project-root> --category project-<slug> --profile generic"
+doctor = "python3 plugins/baza/scripts/baza_doctor.py --root ."
+audit = "python3 plugins/baza/scripts/baza_audit.py"
+docs_sync = "python3 plugins/baza/scripts/baza_docs_sync.py"
+docs_vector_sync = "python3 plugins/baza/scripts/baza_docs_vector_sync.py --root ."
+docs_search = "python3 plugins/baza/scripts/baza_docs_search.py --root . --query <query>"
+docs_health = "python3 plugins/baza/scripts/baza_docs_health.py --root ."
+docs_maintenance = "mongosh --quiet mongodb://localhost:27017/context-hub plugins/baza/scripts/context_hub_maintenance.js"
+register_module = "python3 plugins/baza/scripts/baza_register_module.py <module-name>"
+check_upstreams = "python3 plugins/baza/scripts/baza_check_upstreams.py"
+check_official_sources = "python3 plugins/baza/scripts/baza_check_official_sources.py"
+refresh_projection = "python3 plugins/baza/scripts/baza_refresh_projection.py --root ."
+web_capture_check_deps = "python3 plugins/baza/scripts/web_capture/check_deps.py"
+web_capture_record = "node plugins/baza/scripts/web_capture/record_playwright_cdp.mjs --authorized --url <url> --out .baza/web-re/<run-id>"
+web_capture_record_js_runtime = "node plugins/baza/scripts/web_capture/record_playwright_cdp.mjs --authorized --js-runtime-observer --url <url> --out .baza/web-re/<run-id>"
+web_capture_record_js_coverage = "node plugins/baza/scripts/web_capture/record_playwright_cdp.mjs --authorized --js-coverage --url <url> --out .baza/web-re/<run-id>"
+web_capture_record_js_runtime_and_coverage = "node plugins/baza/scripts/web_capture/record_playwright_cdp.mjs --authorized --js-runtime-observer --js-coverage --url <url> --out .baza/web-re/<run-id>"
+web_capture_build_evidence_graph = "python3 plugins/baza/scripts/web_capture/build_evidence_graph.py .baza/web-re/<run-id>"
+web_capture_diff_runs = "python3 plugins/baza/scripts/web_capture/diff_capture_runs.py .baza/web-re/<left-run-id> .baza/web-re/<right-run-id> --out .baza/web-re/<right-run-id>"
+web_capture_analyze_scripts = "python3 plugins/baza/scripts/web_capture/analyze_scripts.py .baza/web-re/<run-id>"
+web_capture_analyze_coverage = "python3 plugins/baza/scripts/web_capture/analyze_coverage.py .baza/web-re/<run-id>"
+web_capture_redact = "python3 plugins/baza/scripts/web_capture/redact_artifacts.py .baza/web-re/<run-id>"
+web_capture_summarize = "python3 plugins/baza/scripts/web_capture/summarize_capture.py .baza/web-re/<run-id>"
+web_capture_verify = "python3 plugins/baza/scripts/web_capture/verify_artifacts.py .baza/web-re/<run-id> --require-summary"
+global_docs_sync = "PROJECT_ROOT=$HOME/.codex/baza PROJECT_DOCS_DIR=$HOME/.codex/baza/docs PROJECT_DOCS_CATEGORY=project-baza mongosh --quiet mongodb://localhost:27017/context-hub $HOME/.codex/baza/scripts/context_hub_import_project_docs.js"
+
+[orchestration]
+main_thread = "planning, architecture, integration, final review"
+subagents = ["worker", "reviewer", "docs_researcher", "github_operator", "ops_debugger", "project_documentarian"]
+mcp_first = ["github", "openaiDeveloperDocs", "context7", "context_hub", "stealth-browser"]
+web_search = "fallback when no dedicated MCP route exists or MCP evidence is incomplete"
+local_docs_search = ["context-hub", "baza-docs-search", "shell file search fallback"]
+role_profiles = ["Documentation Search Operator", "Documentation Health Operator", "Web Capture Operator", "HTTP Flow Analyst", "JS Coverage Analyst", "Web Protection Analyst"]
+
+[skills]
+baza_official_docs = "$HOME/.codex/baza/skills/baza-official-docs/SKILL.md"
+baza_source_dossier = "$HOME/.codex/baza/skills/baza-source-dossier/SKILL.md"
+baza_docs_search = "$HOME/.codex/baza/skills/baza-docs-search/SKILL.md"
+web_traffic_capture = "$HOME/.codex/baza/skills/web-traffic-capture/SKILL.md"
+http_traffic_analysis = "$HOME/.codex/baza/skills/http-traffic-analysis/SKILL.md"
+js_runtime_analysis = "$HOME/.codex/baza/skills/js-runtime-analysis/SKILL.md"
+js_coverage_analysis = "$HOME/.codex/baza/skills/js-coverage-analysis/SKILL.md"
+tls_fingerprint_research = "$HOME/.codex/baza/skills/tls-fingerprint-research/SKILL.md"
+tls_fingerprint = "$HOME/.codex/baza/skills/tls-fingerprint/SKILL.md"
+captcha_protection_analysis = "$HOME/.codex/baza/skills/captcha-protection-analysis/SKILL.md"
+bot_detection_analysis = "$HOME/.codex/baza/skills/bot-detection-analysis/SKILL.md"
+cloudflare_analysis = "$HOME/.codex/baza/skills/cloudflare-analysis/SKILL.md"
+datadome_analysis = "$HOME/.codex/baza/skills/datadome-analysis/SKILL.md"
+trustev_fingerprint = "$HOME/.codex/baza/skills/trustev-fingerprint/SKILL.md"
+akamai_bypass_guard = "$HOME/.codex/baza/skills/akamai-bypass/SKILL.md"
+recaptcha_solve_guard = "$HOME/.codex/baza/skills/recaptcha-solve/SKILL.md"
+tps_browser_harvester_guard = "$HOME/.codex/baza/skills/tps-browser-harvester/SKILL.md"
+
+[profiles]
+generic = "$HOME/.codex/baza/profiles/generic.toml"
+web_app = "$HOME/.codex/baza/profiles/web-app.toml"
+mobile_app = "$HOME/.codex/baza/profiles/mobile-app.toml"
+reverse_engineering = "$HOME/.codex/baza/profiles/reverse-engineering.toml"
+data_pipeline = "$HOME/.codex/baza/profiles/data-pipeline.toml"
+browser_research = "$HOME/.codex/baza/profiles/browser-research.toml"
+
+[templates]
+web_capture_gitignore = "$HOME/.codex/baza/templates/web-capture.gitignore"
+
+[sections]
+best_practices = "Global rule requiring official-doc-first, project-convention-first, secure, focused, verified, documented engineering work."
+official_sources = "Official docs and canonical repositories for Codex, OpenAI, Zed, ACP, and BAZA source-of-truth decisions."
+source_dossiers = "Durable local cards for official tools and repositories so future projects reuse verified research instead of repeating it."
+vector_memory = "Optional local hybrid vector index for sanitized project documentation, scoped by project category."
+docs_health = "Hash-based freshness checks across Markdown docs, Mongo context-hub manifest, and local vector index."
+reverse_engineering = "Explicit-use workflows for authorized reverse engineering, API extraction, web traffic capture, and JavaScript runtime capture."
+js_runtime_analysis = "Explicit-use workflow for sanitized JavaScript runtime provenance during authorized browser actions."
+http_traffic_analysis = "Explicit-use workflow for sanitized endpoint sequence, HAR, CDP network, and request dependency analysis."
+js_coverage_analysis = "Explicit-use workflow for sanitized CDP JavaScript coverage, executed ranges, high-call functions, and run comparisons."
+capture_evidence_graph = "Sanitized graph and diff workflow linking action, script, worker, browser state, endpoint, and protection evidence."
+web_protection_analysis = "Explicit-use observation workflow for CAPTCHA and bot-protection signals without solving, bypass, harvesting, or replay."
+tls_fingerprint_tooling = "Explicit-use research workflow for TLS, JA3/HTTP2/HTTP3, curl_cffi, curl-impersonate, fing, and tls-client tooling."
+upstream_monitoring = "Read-only checks for external repositories that BAZA tracks."

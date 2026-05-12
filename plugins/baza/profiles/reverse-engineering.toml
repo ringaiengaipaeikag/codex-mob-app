@@ -1,0 +1,6 @@
+id = "reverse-engineering"
+name = "Reverse Engineering"
+description = "Authorized API extraction, APK analysis, traffic capture, HTTP flow analysis, JavaScript runtime and coverage capture, evidence graphs, CAPTCHA/protection observation, guarded provider analysis, TLS fingerprint research, and upstream tool tracking."
+recommended_skills = ["baza-official-docs", "baza-source-dossier", "baza-docs-search", "web-traffic-capture", "http-traffic-analysis", "js-runtime-analysis", "js-coverage-analysis", "captcha-protection-analysis", "bot-detection-analysis", "tls-fingerprint-research", "tls-fingerprint", "browser-research"]
+recommended_docs = ["docs/reverse-engineering.md", "docs/web-traffic-capture.md", "docs/web-traffic-capture-pipeline.md", "docs/js-runtime-analysis.md", "docs/capture-evidence-graph.md", "docs/web-protection-analysis.md", "docs/tls-fingerprint-tooling.md"]
+explicit_only = ["android-reverse-engineering", "web-traffic-capture", "http-traffic-analysis", "js-runtime-analysis", "js-coverage-analysis", "captcha-protection-analysis", "bot-detection-analysis", "cloudflare-analysis", "datadome-analysis", "trustev-fingerprint", "akamai-bypass", "recaptcha-solve", "tps-browser-harvester", "tls-fingerprint-research", "tls-fingerprint", "stealth-browser"]

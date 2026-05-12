@@ -1,0 +1,13 @@
+# BAZA web traffic capture artifacts.
+.baza/web-re/
+.baza/docs-vector/
+*.har
+*.har.zip
+*.flows
+*.pcap
+*.pcapng
+sslkeylogfile*
+playwright-trace.zip
+trace.zip
+browser-profile/
+.playwright-mcp/

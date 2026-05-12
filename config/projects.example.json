@@ -1,0 +1,10 @@
+{
+  "projects": [
+    {
+      "id": "example-project",
+      "name": "Example Project",
+      "path": "/absolute/path/to/example-project",
+      "contextHubCategory": "project-example-project"
+    }
+  ]
+}

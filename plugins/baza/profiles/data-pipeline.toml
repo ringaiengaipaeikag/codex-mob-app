@@ -1,0 +1,6 @@
+id = "data-pipeline"
+name = "Data Pipeline"
+description = "Data ingestion, enrichment, database flow, exports, operational runbooks, and sensitive artifact policy."
+recommended_skills = ["baza-official-docs", "baza-source-dossier", "baza-docs-search", "baza-docs-sync", "baza-orchestration"]
+recommended_docs = ["docs/status.md", "docs/architecture.md", "docs/modules", "docs/runbooks"]
+explicit_only = []
