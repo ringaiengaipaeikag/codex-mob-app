@@ -106,3 +106,7 @@ private reporting guidance are in `SECURITY.md`.
 BAZA is intentionally committed under `plugins/baza/` so contributors can run
 the same local audit commands. Generated BAZA indexes and projection metadata
 are ignored by git.
+
+## License
+
+MIT. See `LICENSE`.

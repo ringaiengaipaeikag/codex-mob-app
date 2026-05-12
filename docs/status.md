@@ -177,6 +177,8 @@ Last updated: 2026-05-12
 - Public contributor preparation: added `CONTRIBUTING.md`, `SECURITY.md`,
   `CODE_OF_CONDUCT.md`, GitHub issue/PR templates, GitHub Actions CI, and
   `docs/contributing/public-repo.md`.
+- Public repository license: added MIT `LICENSE` and linked it from
+  `README.md`.
 
 ## MCP Research
 
