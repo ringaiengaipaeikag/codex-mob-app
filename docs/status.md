@@ -34,7 +34,7 @@ Last updated: 2026-05-23
   continue, turn submission with image attachments, active-turn interrupt, and
   direct transcript rendering from SSE Codex events plus status-pill active-turn
   feedback for long-running answers.
-- Current UI build: `20260523-1945`.
+- Current UI build: `20260523-2000`.
 - Current local URL: `http://127.0.0.1:8787`
 - LAN mode: run with `ZED_MOB_HOST=0.0.0.0` and `ZED_MOB_TOKEN=<token>`.
 - Codex CLI: `codex-cli 0.128.0`
@@ -110,6 +110,13 @@ Last updated: 2026-05-23
 - Mobile script retry fallback: the HTML shell now retries loading `app.js`
   with a unique query string if the primary module script does not mark the app
   loaded shortly after the page opens.
+- Mobile startup diagnostics: the HTML shell reports client-side startup errors
+  and not-ready states to `/api/client-log` with redacted URLs and visible
+  connection-line status. The app marks script-started and app-ready separately
+  so diagnostics distinguish script fetch failure, parse/runtime failure, and
+  API readiness.
+- Mobile Safari compatibility: Markdown rendering no longer depends on
+  `String.prototype.replaceAll`, reducing risk on older WebKit versions.
 - Mobile overflow fix: chat, status pills, sheets, and system cards are clipped
   to the viewport to avoid horizontal scrolling on iPhone.
 - Mobile two-page UX: the phone UI is now split into a settings page and a chat

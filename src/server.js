@@ -72,6 +72,13 @@ async function handleApi(request, response) {
     return;
   }
 
+  if (request.method === "POST" && url.pathname === "/api/client-log") {
+    const body = await readJson(request);
+    console.log(`${new Date().toISOString()} CLIENT ${JSON.stringify(redactClientLog(body))}`);
+    sendJson(response, 202, { ok: true });
+    return;
+  }
+
   if (request.method === "GET" && url.pathname === "/api/projects") {
     const projects = await loadProjects();
     sendJson(response, 200, { projects: projects.map(publicProject) });
@@ -637,7 +644,14 @@ function sendJson(response, statusCode, payload) {
 function logRequest(request) {
   const url = new URL(request.url, `http://${request.headers.host}`);
   const safeUrl = `${url.pathname}${url.searchParams.has("token") ? "?token=<redacted>" : url.search}`;
-  console.log(`${new Date().toISOString()} ${request.method} ${safeUrl}`);
+  const agent = String(request.headers["user-agent"] || "").slice(0, 140);
+  const address = request.socket?.remoteAddress || "";
+  console.log(`${new Date().toISOString()} ${request.method} ${safeUrl} ${address} ${agent}`);
+}
+
+function redactClientLog(payload) {
+  const text = JSON.stringify(payload || {});
+  return JSON.parse(text.replace(/token=([^"&\s]+)/gi, "token=<redacted>"));
 }
 
 function contentType(filePath) {

@@ -6,7 +6,68 @@
     <meta name="theme-color" content="#0f1726">
     <meta http-equiv="cache-control" content="no-store">
     <title>Zed Mob Gateway</title>
-    <link rel="stylesheet" href="/styles.css?v=20260523-1945">
+    <link rel="stylesheet" href="/styles.css?v=20260523-2000">
+    <script>
+      (() => {
+        const build = "20260523-2000";
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get("token") || "";
+        const apiSuffix = token ? `?token=${encodeURIComponent(token)}` : "";
+        const safeLocation = `${window.location.pathname}${window.location.search.replace(/token=[^&]+/i, "token=<redacted>")}`;
+        function setLine(message) {
+          const line = document.querySelector("#connectionLine");
+          if (line) line.textContent = message;
+        }
+        function report(type, detail) {
+          if (!token) return;
+          window.fetch(`/api/client-log${apiSuffix}`, {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              build,
+              type,
+              detail,
+              location: safeLocation,
+              userAgent: window.navigator.userAgent
+            })
+          }).catch(() => {});
+        }
+        window.addEventListener("error", (event) => {
+          setLine(`app error · ${event.message || "script failed"}`);
+          report("error", {
+            message: event.message || "",
+            source: event.filename || "",
+            line: event.lineno || 0,
+            column: event.colno || 0
+          });
+        });
+        window.addEventListener("unhandledrejection", (event) => {
+          const reason = (event.reason && event.reason.message) || String(event.reason || "unhandled rejection");
+          setLine(`app error · ${reason}`);
+          report("unhandledrejection", { reason });
+        });
+        window.addEventListener("DOMContentLoaded", () => {
+          if (!window.zedMobScriptStarted) {
+            setLine(`html loaded · waiting app ${build}`);
+          }
+        });
+        window.setTimeout(() => {
+          if (window.zedMobScriptStarted) return;
+          setLine(`retry app.js · ${build}`);
+          report("retry-script", {});
+          const script = document.createElement("script");
+          script.type = "module";
+          script.src = `/app.js?v=${build}&retry=${Date.now()}`;
+          document.body.append(script);
+        }, 4000);
+        window.setTimeout(() => {
+          if (window.zedMobAppReady) return;
+          const state = window.zedMobScriptStarted ? "app started but not ready" : "app.js did not start";
+          setLine(`${state} · ${build}`);
+          report("not-ready", { state });
+        }, 9000);
+      })();
+    </script>
   </head>
   <body>
     <main class="shell">
@@ -80,7 +141,7 @@
             <button id="refreshHistoryButton" class="mini-button" type="button">Refresh Chats</button>
             <button id="stopButton" class="mini-button danger" type="button">Stop Runtime</button>
           </div>
-          <pre id="output">build 20260523-1945</pre>
+          <pre id="output">build 20260523-2000</pre>
         </details>
 
         <footer class="composer">
@@ -135,15 +196,6 @@
       </section>
     </div>
 
-    <script>
-      window.setTimeout(() => {
-        if (window.zedMobAppLoaded) return;
-        const script = document.createElement("script");
-        script.type = "module";
-        script.src = `/app.js?v=20260523-1945&retry=${Date.now()}`;
-        document.body.append(script);
-      }, 4000);
-    </script>
-    <script src="/app.js?v=20260523-1945" type="module"></script>
+    <script src="/app.js?v=20260523-2000" type="module"></script>
   </body>
 </html>

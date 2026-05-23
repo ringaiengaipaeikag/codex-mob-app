@@ -1,5 +1,5 @@
 const storage = safeStorage();
-window.zedMobAppLoaded = true;
+window.zedMobScriptStarted = true;
 
 function safeStorage() {
   try {
@@ -36,7 +36,7 @@ const state = {
   bazaMissing: [],
   activeSessionId: storage.get("zedMobActiveSessionId") || "",
   token: new URLSearchParams(window.location.search).get("token") || storage.get("zedMobToken") || "",
-  build: "20260523-1945",
+  build: "20260523-2000",
   activeEvents: null,
   subscribedSessionId: "",
   streamConnected: false,
@@ -267,6 +267,7 @@ async function loadProjects() {
   if (!state.selectedProject && state.projects[0]) {
     selectProject(state.projects[0]);
   }
+  window.zedMobAppReady = true;
 }
 
 function renderProjects() {
@@ -1670,7 +1671,7 @@ function renderRichMessageText(text) {
 
 function renderProseBlock(text) {
   if (!text) return "";
-  const html = renderInlineMarkdown(text.trimEnd()).replaceAll("\n", "<br>");
+  const html = renderInlineMarkdown(text.trimEnd()).split("\n").join("<br>");
   return html ? `<div class="message-prose">${html}</div>` : "";
 }
 
@@ -2314,12 +2315,12 @@ function bazaRequiredMessage() {
 
 function escapeHtml(value) {
   return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function escapeAttr(value) {
-  return escapeHtml(value).replaceAll("'", "&#39;");
+  return escapeHtml(value).replace(/'/g, "&#39;");
 }
