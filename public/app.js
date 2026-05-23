@@ -13,7 +13,7 @@ const state = {
   bazaMissing: [],
   activeSessionId: localStorage.getItem("zedMobActiveSessionId") || "",
   token: new URLSearchParams(window.location.search).get("token") || localStorage.getItem("zedMobToken") || "",
-  build: "20260523-1845",
+  build: "20260523-1900",
   activeEvents: null,
   subscribedSessionId: "",
   streamConnected: false,
