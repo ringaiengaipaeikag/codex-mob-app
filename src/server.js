@@ -72,6 +72,40 @@ async function handleApi(request, response) {
     return;
   }
 
+  if (request.method === "GET" && url.pathname === "/api/debug-phone") {
+    response.writeHead(200, {
+      "content-type": "text/html; charset=utf-8",
+      "cache-control": "no-store"
+    });
+    response.end(`<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Zed Mob Debug</title>
+  </head>
+  <body style="font-family: -apple-system, sans-serif; padding: 24px; background: #111; color: #fff;">
+    <h1>Debug page loaded</h1>
+    <p id="status">inline script not yet run</p>
+    <pre id="out"></pre>
+    <script>
+      const token = new URLSearchParams(location.search).get("token") || "";
+      const suffix = token ? "?token=" + encodeURIComponent(token) : "";
+      document.querySelector("#status").textContent = "inline script ran";
+      fetch("/api/health" + suffix)
+        .then((response) => response.json())
+        .then((data) => {
+          document.querySelector("#out").textContent = JSON.stringify(data, null, 2);
+        })
+        .catch((error) => {
+          document.querySelector("#out").textContent = "fetch failed: " + error.message;
+        });
+    </script>
+  </body>
+</html>`);
+    return;
+  }
+
   if (request.method === "POST" && url.pathname === "/api/client-log") {
     const body = await readJson(request);
     console.log(`${new Date().toISOString()} CLIENT ${JSON.stringify(redactClientLog(body))}`);
