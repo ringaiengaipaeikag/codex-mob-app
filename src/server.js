@@ -106,6 +106,24 @@ async function handleApi(request, response) {
     return;
   }
 
+  if (request.method === "GET" && url.pathname === "/api/mobile") {
+    const [index, styles, app] = await Promise.all([
+      fs.readFile(path.join(PUBLIC_DIR, "index.html"), "utf8"),
+      fs.readFile(path.join(PUBLIC_DIR, "styles.css"), "utf8"),
+      fs.readFile(path.join(PUBLIC_DIR, "app.js"), "utf8")
+    ]);
+    const bundled = index
+      .replace(/<link rel="stylesheet" href="\/styles\.css\?v=[^"]+">/, `<style>\n${styles}\n</style>`)
+      .replace(/<script>\s*\(\(\) => \{[\s\S]*?\}\)\(\);\s*<\/script>\s*/m, "")
+      .replace(/<script src="\/app\.js\?v=[^"]+" type="module"><\/script>/, `<script>\n${app}\n</script>`);
+    response.writeHead(200, {
+      "content-type": "text/html; charset=utf-8",
+      "cache-control": "no-store"
+    });
+    response.end(bundled);
+    return;
+  }
+
   if (request.method === "POST" && url.pathname === "/api/client-log") {
     const body = await readJson(request);
     console.log(`${new Date().toISOString()} CLIENT ${JSON.stringify(redactClientLog(body))}`);
