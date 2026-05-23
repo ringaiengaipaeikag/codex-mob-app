@@ -46,7 +46,7 @@ export async function runBazaPreflight(project, options = {}) {
   commands.push(await runMake(project.path, "baza-audit"));
 
   if (options.syncDocs) {
-    commands.push(await runMake(project.path, "baza-docs-sync"));
+    commands.push(...(await runDocsIndex(project.path)));
   }
 
   const commandFailures = commands.filter((command) => command.exitCode !== 0);
@@ -76,7 +76,8 @@ export async function runBazaAction(project) {
 
   commands.push(await runMake(project.path, "baza-doctor"));
   commands.push(await runMake(project.path, "baza-audit"));
-  commands.push(await runMake(project.path, "baza-docs-sync"));
+  commands.push(...(await runDocsIndex(project.path)));
+  commands.push(await runOptionalMake(project.path, "baza-docs-health"));
 
   const after = await inspectBaza(project);
   const commandFailures = commands.filter((command) => command.exitCode !== 0);
@@ -125,6 +126,47 @@ async function runMake(cwd, target) {
   });
 }
 
+async function runDocsIndex(cwd) {
+  if (await hasMakeTarget(cwd, "baza-docs-index")) {
+    return [await runMake(cwd, "baza-docs-index")];
+  }
+
+  const commands = [await runMake(cwd, "baza-docs-sync")];
+  commands.push(await runOptionalMake(cwd, "baza-docs-vector-sync"));
+  return commands;
+}
+
+async function runOptionalMake(cwd, target) {
+  if (!(await hasMakeTarget(cwd, target))) {
+    return skippedCommand(target);
+  }
+  return runMake(cwd, target);
+}
+
+async function hasMakeTarget(cwd, target) {
+  try {
+    const makefile = await fs.readFile(path.join(cwd, "Makefile"), "utf8");
+    return new RegExp(`^${escapeRegExp(target)}\\s*:`, "m").test(makefile);
+  } catch {
+    return false;
+  }
+}
+
+function skippedCommand(target) {
+  const now = new Date().toISOString();
+  return {
+    target,
+    ok: true,
+    skipped: true,
+    exitCode: 0,
+    startedAt: now,
+    finishedAt: now,
+    stdout: "",
+    stderr: "",
+    warnings: []
+  };
+}
+
 async function runCommand({ label, command, args, cwd, timeout }) {
   const startedAt = new Date().toISOString();
   try {
@@ -163,4 +205,8 @@ function collectWarnings(stdout, stderr) {
     .split(/\r?\n/)
     .filter((line) => /\bwarn/i.test(line))
     .slice(0, 50);
+}
+
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }

@@ -1,6 +1,6 @@
 # Zed Mob Gateway Module
 
-Last updated: 2026-05-12
+Last updated: 2026-05-23
 
 ## Purpose
 
@@ -94,9 +94,13 @@ workspace database. `POST /projects/sync-zed` imports recent projects into the
 gateway allowlist when they are under the configured projects root or a Zed
 trusted worktree root. `POST /projects` creates a new folder under
 `ZED_MOB_PROJECTS_ROOT` or the gateway's parent `projects` directory and adds it
-to the allowlist. See `docs/modules/baza-projection.md` for the BAZA local
-data-store model, including the context-hub documentation database, generated
-vector index, and Zed project catalog import flow.
+to the allowlist. The mobile UI immediately runs the user-facing BAZA action
+after creating a project, so a freshly created project receives the project
+instructions, docs scaffold, BAZA plugin projection, Makefile targets, docs
+index, and health check before the user starts Codex work. See
+`docs/modules/baza-projection.md` for the BAZA local data-store model,
+including the context-hub documentation database, generated vector index, and
+Zed project catalog import flow.
 
 Chats:
 
@@ -185,20 +189,30 @@ make baza-doctor
 make baza-audit
 ```
 
-When requested with `syncDocs: true`, preflight also runs:
+When requested with `syncDocs: true`, preflight also runs the combined docs
+index target when available:
 
 ```bash
-make baza-docs-sync
+make baza-docs-index
 ```
+
+Older BAZA projections without `baza-docs-index` fall back to
+`baza-docs-sync` and `baza-docs-vector-sync` when those targets exist.
 
 Preflight returns command output, warnings, exit codes, and a blocking status.
 Blocking failures prevent the UI from creating or resuming mobile-controlled
 agent runtime.
 
 `POST /api/projects/:projectId/baza` is the user-facing BAZA action. For an
-existing BAZA project it runs projection refresh, doctor, audit, and docs sync.
-For a new or partial project it first runs `plugins/baza/scripts/baza_init.py`
-from the gateway project and then runs doctor, audit, and docs sync.
+existing BAZA project it runs projection refresh, doctor, audit, the combined
+docs index, and docs health. For a new or partial project it first runs
+`plugins/baza/scripts/baza_init.py` from the gateway project and then runs
+doctor, audit, docs index, and docs health.
+
+The BAZA button in the mobile UI calls this endpoint. New project creation in
+the mobile project picker also calls it automatically after the project is
+created and selected. The button remains useful as a manual refresh when BAZA
+files, docs, skills, MCP routing, or Makefile targets change.
 
 Mobile session creation, session start, and history resume use the same BAZA
 action automatically by passing `autoBaza: true`. If the automatic preparation

@@ -1,6 +1,6 @@
 # Project Status
 
-Last updated: 2026-05-12
+Last updated: 2026-05-23
 
 ## Project
 
@@ -34,7 +34,7 @@ Last updated: 2026-05-12
   continue, turn submission with image attachments, active-turn interrupt, and
   direct transcript rendering from SSE Codex events plus status-pill active-turn
   feedback for long-running answers.
-- Current UI build: `20260505-2045`.
+- Current UI build: `20260523-1845`.
 - Current local URL: `http://127.0.0.1:8787`
 - LAN mode: run with `ZED_MOB_HOST=0.0.0.0` and `ZED_MOB_TOKEN=<token>`.
 - Codex CLI: `codex-cli 0.128.0`
@@ -95,6 +95,10 @@ Last updated: 2026-05-12
   initialized or refreshed before Codex runtime startup. If BAZA still fails,
   the transcript shows one actionable BAZA card instead of repeated generic
   errors.
+- New project BAZA fix: creating a project from the mobile project picker now
+  immediately runs the BAZA action after the project is selected. The action
+  initializes or refreshes the projection, runs doctor/audit, rebuilds the docs
+  index, and runs docs health when the project exposes those Makefile targets.
 - Mobile overflow fix: chat, status pills, sheets, and system cards are clipped
   to the viewport to avoid horizontal scrolling on iPhone.
 - Mobile two-page UX: the phone UI is now split into a settings page and a chat

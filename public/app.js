@@ -13,7 +13,7 @@ const state = {
   bazaMissing: [],
   activeSessionId: localStorage.getItem("zedMobActiveSessionId") || "",
   token: new URLSearchParams(window.location.search).get("token") || localStorage.getItem("zedMobToken") || "",
-  build: "20260505-2045",
+  build: "20260523-1845",
   activeEvents: null,
   subscribedSessionId: "",
   streamConnected: false,
@@ -398,6 +398,9 @@ async function createProjectFromSheet() {
   nodes.newProjectName.value = "";
   selectProject(data.project);
   writeOutput(JSON.stringify(data, null, 2));
+  await runBazaAction({
+    message: "Project created. BAZA is preparing it now."
+  });
 }
 
 async function loadProjectInbox(options = {}) {
@@ -428,13 +431,13 @@ async function runPreflight(syncDocs) {
   writeOutput(JSON.stringify(data, null, 2));
 }
 
-async function runBazaAction() {
+async function runBazaAction(options = {}) {
   if (!state.selectedProject) return;
   nodes.preflightButton.disabled = true;
   nodes.preflightButton.textContent = "BAZA running...";
   nodes.bazaStatus.textContent = "BAZA running...";
   removeNoticeMessages("baza-required");
-  addSystemMessage("BAZA is preparing this project...", {
+  addSystemMessage(options.message || "BAZA is preparing this project...", {
     pending: true,
     noticeKey: "baza-running"
   });

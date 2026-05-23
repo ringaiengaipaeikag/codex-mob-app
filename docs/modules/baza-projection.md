@@ -1,6 +1,6 @@
 # BAZA Projection Module
 
-Last updated: 2026-05-12
+Last updated: 2026-05-23
 
 ## Purpose
 
@@ -180,11 +180,18 @@ make baza-doctor
 make baza-audit
 ```
 
-When documentation changes materially:
+When documentation changes materially, or when the gateway prepares a project
+through the BAZA button:
 
 ```bash
-make baza-docs-sync
+make baza-docs-index
+make baza-docs-health
 ```
+
+The mobile UI now applies this action automatically after creating a new project
+folder. That avoids a split state where a project appears in the gateway
+allowlist but does not yet have `AGENTS.md`, BAZA skills, MCP routing docs, the
+project Makefile targets, context-hub docs sync, and local vector indexing.
 
 For project discovery, the gateway reads Zed's SQLite database read-only,
 filters paths through trusted roots, and writes selected projects into the
