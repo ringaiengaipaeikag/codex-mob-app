@@ -34,7 +34,7 @@ Last updated: 2026-05-23
   continue, turn submission with image attachments, active-turn interrupt, and
   direct transcript rendering from SSE Codex events plus status-pill active-turn
   feedback for long-running answers.
-- Current UI build: `20260523-1915`.
+- Current UI build: `20260523-1945`.
 - Current local URL: `http://127.0.0.1:8787`
 - LAN mode: run with `ZED_MOB_HOST=0.0.0.0` and `ZED_MOB_TOKEN=<token>`.
 - Codex CLI: `codex-cli 0.128.0`
@@ -103,6 +103,13 @@ Last updated: 2026-05-23
   stored `activeTurnId` as well as marking the mobile session ready, preventing
   the phone UI from treating a completed answer as still active after reconnect
   or server restart.
+- Mobile Safari storage fallback: the PWA no longer reads `localStorage`
+  directly during startup. If Safari private mode, cookie settings, or storage
+  policy block localStorage, the UI falls back to in-memory storage so token
+  parsing and project loading can still start.
+- Mobile script retry fallback: the HTML shell now retries loading `app.js`
+  with a unique query string if the primary module script does not mark the app
+  loaded shortly after the page opens.
 - Mobile overflow fix: chat, status pills, sheets, and system cards are clipped
   to the viewport to avoid horizontal scrolling on iPhone.
 - Mobile two-page UX: the phone UI is now split into a settings page and a chat

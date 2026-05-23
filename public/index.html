@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#0f1726">
+    <meta http-equiv="cache-control" content="no-store">
     <title>Zed Mob Gateway</title>
-    <link rel="stylesheet" href="/styles.css?v=20260523-1915">
+    <link rel="stylesheet" href="/styles.css?v=20260523-1945">
   </head>
   <body>
     <main class="shell">
@@ -79,7 +80,7 @@
             <button id="refreshHistoryButton" class="mini-button" type="button">Refresh Chats</button>
             <button id="stopButton" class="mini-button danger" type="button">Stop Runtime</button>
           </div>
-          <pre id="output">build 20260523-1915</pre>
+          <pre id="output">build 20260523-1945</pre>
         </details>
 
         <footer class="composer">
@@ -134,6 +135,15 @@
       </section>
     </div>
 
-    <script src="/app.js?v=20260523-1915" type="module"></script>
+    <script>
+      window.setTimeout(() => {
+        if (window.zedMobAppLoaded) return;
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = `/app.js?v=20260523-1945&retry=${Date.now()}`;
+        document.body.append(script);
+      }, 4000);
+    </script>
+    <script src="/app.js?v=20260523-1945" type="module"></script>
   </body>
 </html>

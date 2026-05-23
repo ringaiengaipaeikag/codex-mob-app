@@ -1,3 +1,26 @@
+const storage = safeStorage();
+window.zedMobAppLoaded = true;
+
+function safeStorage() {
+  try {
+    const testKey = "__zed_mob_storage_test__";
+    window.localStorage.setItem(testKey, "1");
+    window.localStorage.removeItem(testKey);
+    return {
+      get: (key) => window.localStorage.getItem(key),
+      set: (key, value) => window.localStorage.setItem(key, value),
+      remove: (key) => window.localStorage.removeItem(key)
+    };
+  } catch {
+    const memory = new Map();
+    return {
+      get: (key) => memory.get(key) || "",
+      set: (key, value) => memory.set(key, String(value)),
+      remove: (key) => memory.delete(key)
+    };
+  }
+}
+
 const state = {
   projects: [],
   sessions: [],
@@ -11,9 +34,9 @@ const state = {
   selectedProject: null,
   bazaOk: false,
   bazaMissing: [],
-  activeSessionId: localStorage.getItem("zedMobActiveSessionId") || "",
-  token: new URLSearchParams(window.location.search).get("token") || localStorage.getItem("zedMobToken") || "",
-  build: "20260523-1915",
+  activeSessionId: storage.get("zedMobActiveSessionId") || "",
+  token: new URLSearchParams(window.location.search).get("token") || storage.get("zedMobToken") || "",
+  build: "20260523-1945",
   activeEvents: null,
   subscribedSessionId: "",
   streamConnected: false,
@@ -39,7 +62,7 @@ const state = {
   lastStreamEventAt: 0,
   lastAssistantOutputAt: 0,
   lastMonitorNoticeAt: 0,
-  approvalMode: localStorage.getItem("zedMobApprovalMode") === "alwaysAllow" ? "alwaysAllow" : "ask",
+  approvalMode: storage.get("zedMobApprovalMode") === "alwaysAllow" ? "alwaysAllow" : "ask",
   attachments: [],
   chatFocus: false,
   chatFocusSuppressed: false,
@@ -170,7 +193,7 @@ window.visualViewport?.addEventListener("resize", syncViewportHeight);
 window.visualViewport?.addEventListener("scroll", syncViewportHeight);
 
 if (state.token) {
-  localStorage.setItem("zedMobToken", state.token);
+  storage.set("zedMobToken", state.token);
 }
 
 writeOutput(`build ${state.build}`);
@@ -269,7 +292,7 @@ function selectProject(project) {
   state.historyNextCursor = "";
   state.activeHistoryThreadId = "";
   state.historyError = "";
-  state.activeSessionId = localStorage.getItem("zedMobActiveSessionId") || "";
+  state.activeSessionId = storage.get("zedMobActiveSessionId") || "";
   state.threadMessages = [];
   state.historyLoadedThreadId = "";
   state.historyOlderCursor = "";
@@ -477,16 +500,16 @@ async function loadSessions() {
   const activeSession = state.sessions.find((session) => session.id === state.activeSessionId);
   if (!activeSession || activeSession.status === "stale") {
     state.activeSessionId = "";
-    localStorage.removeItem("zedMobActiveSessionId");
+    storage.remove("zedMobActiveSessionId");
   }
   if (state.activeSessionId) {
-    localStorage.setItem("zedMobActiveSessionId", state.activeSessionId);
+    storage.set("zedMobActiveSessionId", state.activeSessionId);
   }
   if (activeSession) {
     const serverMode = activeSession.approvalMode || "ask";
     if (serverMode === "alwaysAllow" && state.approvalMode !== "alwaysAllow") {
       state.approvalMode = "alwaysAllow";
-      localStorage.setItem("zedMobApprovalMode", state.approvalMode);
+      storage.set("zedMobApprovalMode", state.approvalMode);
     }
     const active = Boolean(activeSession.activeTurnId) || ["running", "interrupting"].includes(activeSession.status);
     if (active && !state.turnActive) {
@@ -508,7 +531,7 @@ async function loadSessions() {
 
 async function toggleApprovalMode() {
   state.approvalMode = state.approvalMode === "alwaysAllow" ? "ask" : "alwaysAllow";
-  localStorage.setItem("zedMobApprovalMode", state.approvalMode);
+  storage.set("zedMobApprovalMode", state.approvalMode);
   renderApprovalMode();
   await syncApprovalMode();
   if (state.approvalMode === "alwaysAllow") {
@@ -542,7 +565,7 @@ async function syncApprovalMode() {
   }
   if (data.approvalMode) {
     state.approvalMode = data.approvalMode;
-    localStorage.setItem("zedMobApprovalMode", state.approvalMode);
+    storage.set("zedMobApprovalMode", state.approvalMode);
     renderApprovalMode();
   }
   return data;
@@ -729,7 +752,7 @@ async function activateSession(sessionId, options = {}) {
   if (previousSessionId !== sessionId) {
     state.lastEventSeq = 0;
   }
-  localStorage.setItem("zedMobActiveSessionId", sessionId);
+  storage.set("zedMobActiveSessionId", sessionId);
   state.historyExpanded = false;
   state.threadMessages = [];
   state.historyLoadedThreadId = "";
@@ -788,7 +811,7 @@ async function createSession(options = {}) {
   state.lastEventSeq = 0;
   state.historyExpanded = false;
   state.threadMessages = [];
-  localStorage.setItem("zedMobActiveSessionId", state.activeSessionId);
+  storage.set("zedMobActiveSessionId", state.activeSessionId);
   await syncApprovalMode();
   await loadStatus();
   await loadSessions();
@@ -879,7 +902,7 @@ async function resumeHistoryThread(threadId) {
     state.lastEventSeq = 0;
     state.activeHistoryThreadId = "";
     state.historyExpanded = false;
-    localStorage.setItem("zedMobActiveSessionId", state.activeSessionId);
+    storage.set("zedMobActiveSessionId", state.activeSessionId);
     await syncApprovalMode();
     await loadStatus();
     await loadSessions();
@@ -2221,7 +2244,7 @@ async function api(path, options = {}) {
     const token = window.prompt("Gateway token");
     if (token) {
       state.token = token;
-      localStorage.setItem("zedMobToken", token);
+      storage.set("zedMobToken", token);
       return api(path, options);
     }
   }
