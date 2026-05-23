@@ -99,6 +99,10 @@ Last updated: 2026-05-23
   immediately runs the BAZA action after the project is selected. The action
   initializes or refreshes the projection, runs doctor/audit, rebuilds the docs
   index, and runs docs health when the project exposes those Makefile targets.
+- Mobile stale-turn fix: Codex `thread/status/changed: idle` now clears the
+  stored `activeTurnId` as well as marking the mobile session ready, preventing
+  the phone UI from treating a completed answer as still active after reconnect
+  or server restart.
 - Mobile overflow fix: chat, status pills, sheets, and system cards are clipped
   to the viewport to avoid horizontal scrolling on iPhone.
 - Mobile two-page UX: the phone UI is now split into a settings page and a chat

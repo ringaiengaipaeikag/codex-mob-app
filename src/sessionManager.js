@@ -294,7 +294,8 @@ function recordEvent(runtime, event) {
       updateSession(runtime.sessionId, { status: "running" }).catch(() => {});
     }
     if (status === "idle") {
-      updateSession(runtime.sessionId, { status: "ready" }).catch(() => {});
+      runtime.activeTurnId = null;
+      updateSession(runtime.sessionId, { status: "ready", activeTurnId: null }).catch(() => {});
     }
   }
   for (const subscriber of runtime.subscribers) {
